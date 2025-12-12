@@ -1,0 +1,49 @@
+class NotificationModel {
+  final String id;
+  final String? userId;
+  final String? title;
+  final String? message;
+  final String? type;
+  final bool? isRead;
+  final String? relatedId;
+  final DateTime? createdAt;
+
+  NotificationModel({
+    required this.id,
+    this.userId,
+    this.title,
+    this.message,
+    this.type,
+    this.isRead,
+    this.relatedId,
+    this.createdAt,
+  });
+
+  factory NotificationModel.fromJson(Map<String, dynamic> json) {
+    return NotificationModel(
+      id: json['id'] as String,
+      userId: json['user_id'] as String?,
+      title: json['title'] as String?,
+      message: json['message'] as String?,
+      type: json['type'] as String?,
+      isRead: json['is_read'] as bool?,
+      relatedId: json['related_id'] as String?,
+      createdAt: json['created_at'] != null 
+          ? DateTime.parse(json['created_at']) 
+          : null,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'user_id': userId,
+      'title': title,
+      'message': message,
+      'type': type,
+      'is_read': isRead,
+      'related_id': relatedId,
+      'created_at': createdAt?.toIso8601String(),
+    };
+  }
+}
